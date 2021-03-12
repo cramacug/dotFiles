@@ -30,12 +30,13 @@ function install_basics() {
 function update_fstab() {
   #WIP
   # With max size --> noatime,nodiratime,nodev,nosuid,mode=1777,defaults,size=2048M
+  sudo -s
   local FSTAB="/etc/fstab"
   echo "# tmp on RAM" >>"$FSTAB"
   echo "# Folder mounted on ram." >>"$FSTAB"
   echo "tmpfs  /tmp                    tmpfs   noatime,nodiratime,nodev,nosuid,mode=1777,defaults      0       0" >>"$FSTAB"
   echo "tmpfs  /var/tmp                tmpfs   noatime,nodiratime,nodev,nosuid,mode=1777,defaults      0       0" >>"$FSTAB"
-
+  exit
   # Maybe we do not need to mount smb or nfs folder
   # TODO remove
   #echo "# NFS on DS918+" >>"$FSTAB"
