@@ -158,7 +158,7 @@ function install_docker() {
   printf "\n\n"
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-  if [[ "$OS" == "$PI" || "$OS" == "$KUBUNTU" ]]; then
+  if [[ "$OS" == "$K8_CLUSTER" || "$OS" == "$KUBUNTU" ]]; then
     echo "KUBUNTU"
 
     sudo apt-get remove docker docker-engine docker.io containerd runc || true
@@ -170,13 +170,13 @@ function install_docker() {
       gnupg-agent \
       software-properties-common -y
 
-    if [[ "$OS" == "$PI" ]]; then
-      echo "PI"
+    if [[ "$OS" == "$K8_CLUSTER" ]]; then
+      echo "$K8_CLUSTER"
       # arm64
       sudo add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
     elif [[ "$OS" == "$KUBUNTU" ]]; then
       # x86_64/amd64
-      echo "KUBUNTU"
+      echo "$KUBUNTU"
       sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu  $(lsb_release -cs)  stable"
     fi
 
