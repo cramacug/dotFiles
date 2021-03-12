@@ -106,6 +106,7 @@ function install_OhMyZsh() {
   # Install powerlevel10k theme
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
+  # Install Syntax highlighting plugin
   cd "$HOME/.oh-my-zsh/plugins"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
   update_zshrc
@@ -289,18 +290,14 @@ if [[ "$OS" == "$KUBUNTU" ]]; then
   install_vim
   install_docker
   install_OhMyZsh
-  install_ohMyZsh_powerlevel9k_theme
-  install_ZshSyntaxHighlightingPlugin
 elif [[ "$OS" == "$K8_CLUSTER" ]]; then
   echo "$OS"
   install_basics
   update_fstab
   install_vim
-  install_OhMyZsh
   install_docker
+  install_OhMyZsh
   #  container d
-  install_ohMyZsh_powerlevel9k_theme
-  install_ZshSyntaxHighlightingPlugin
 elif [[ "$OS" == "$MAC" ]]; then
   echo "$OS"
   # Previously should install brew
