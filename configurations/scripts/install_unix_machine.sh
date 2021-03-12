@@ -110,6 +110,7 @@ function install_OhMyZsh() {
   git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
   # Install Syntax highlighting plugin
+  mkdir -p "$HOME/.oh-my-zsh/plugins"
   cd "$HOME/.oh-my-zsh/plugins"
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git
   update_zshrc
