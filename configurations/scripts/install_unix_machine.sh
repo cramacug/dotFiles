@@ -13,12 +13,22 @@ K8_NODE="k8_node"
 DATE=$(date +"%Y-%m-%dT%T")
 RESOURCE_DIRECTORY="../files"
 
+RED='\033[0;31m'
+GREEN='\033[1;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[1;34m'
+NC='\033[0m' # No Color
+
 OS=$1
 echo "Selected OS: $OS"
 
 ########## Linux Software
 #############################################################################################
 function install_basics() {
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} BASICS ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
   sudo apt install -y vim htop curl
   sudo apt install -y zsh-theme-powerlevel9k zsh zsh-syntax-highlighting jq
   sudo apt-get install qemu-guest-agent
@@ -30,13 +40,15 @@ function install_basics() {
 function update_fstab() {
   #WIP
   # With max size --> noatime,nodiratime,nodev,nosuid,mode=1777,defaults,size=2048M
-  sudo -s
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} FSTAB ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
   local FSTAB="/etc/fstab"
-  echo "# tmp on RAM" >>"$FSTAB"
-  echo "# Folder mounted on ram." >>"$FSTAB"
-  echo "tmpfs  /tmp                    tmpfs   noatime,nodiratime,nodev,nosuid,mode=1777,defaults      0       0" >>"$FSTAB"
-  echo "tmpfs  /var/tmp                tmpfs   noatime,nodiratime,nodev,nosuid,mode=1777,defaults      0       0" >>"$FSTAB"
-  exit
+  sudo echo "# tmp on RAM" >>"$FSTAB"
+  sudo echo "# Folder mounted on ram." >>"$FSTAB"
+  sudo echo "tmpfs  /tmp                    tmpfs   noatime,nodiratime,nodev,nosuid,mode=1777,defaults      0       0" >>"$FSTAB"
+  sudo echo "tmpfs  /var/tmp                tmpfs   noatime,nodiratime,nodev,nosuid,mode=1777,defaults      0       0" >>"$FSTAB"
   # Maybe we do not need to mount smb or nfs folder
   # TODO remove
   #echo "# NFS on DS918+" >>"$FSTAB"
@@ -45,6 +57,10 @@ function update_fstab() {
 }
 
 function amazon_corretto_11() {
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} Amazon Corretto 11 ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
   cd /tmp
   curl -LO https://corretto.aws/downloads/latest/amazon-corretto-11-x64-linux-jdk.deb
   dpkg -i amazon-*.deb
@@ -56,6 +72,10 @@ function amazon_corretto_11() {
 ########## Oh my zsh
 #############################################################################################
 function install_OhMyZsh() {
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} Oh My Zsh ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
   # Clear old installations
   local ZSH_RUNTIME_FOLDER="$HOME/.oh-my-zsh"
   if [ -d "$ZSH_RUNTIME_FOLDER" ]; then
@@ -101,6 +121,10 @@ function install_OhMyZsh() {
 #############################################################################################
 function install_vim() {
 
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} VIM ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
   sudo apt install -y vim
 
   # Clear old installations
