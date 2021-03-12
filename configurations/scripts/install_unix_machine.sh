@@ -33,6 +33,7 @@ function install_basics() {
   git config --global core.editor "vim"
 
   sudo apt install nfs-common
+  update_htoprc
 }
 function update_fstab() {
   #WIP
@@ -286,17 +287,15 @@ function update_htoprc() {
 if [[ "$OS" == "$KUBUNTU" ]]; then
   echo "$OS"
   install_basics
-  update_fstab
+#  update_fstab
   install_vim
   install_docker
-  install_OhMyZsh
 elif [[ "$OS" == "$K8_CLUSTER" ]]; then
   echo "$OS"
   install_basics
-  update_fstab
+#  update_fstab
   install_vim
   install_docker
-  install_OhMyZsh
   #  container d
 elif [[ "$OS" == "$MAC" ]]; then
   echo "$OS"
@@ -313,8 +312,7 @@ printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} RC_FILES ${NC}\n"
 printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
 printf "\n\n"
 
-update_vimrc
-update_htoprc
+install_OhMyZsh
 update_zshrc
 
 
