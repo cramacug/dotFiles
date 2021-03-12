@@ -220,9 +220,8 @@ function update_zshrc() {
     mkdir -p "$PATH_TEMP_BACK_UP_FILE"
     touch "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
     mv -v "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" "$PATH_TEMP_BACK_UP_FILE"
-  else
-    cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
   fi
+  cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
 
 }
 
@@ -243,9 +242,8 @@ function update_vimrc() {
     mkdir -p "$PATH_TEMP_BACK_UP_FILE"
     touch "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
     mv -v "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" "$PATH_TEMP_BACK_UP_FILE"
-  else
-    cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
   fi
+    cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
 
   # vim/autoload
   local PATH_VIM_AUTOLOAD="$HOME/.vim/autoload"
@@ -274,9 +272,8 @@ function update_htoprc() {
     mkdir -p "$PATH_TEMP_BACK_UP_FILE"
     touch "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
     mv -v "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" "$PATH_TEMP_BACK_UP_FILE"
-  else
-    cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
   fi
+  cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
 }
 
 #############################################################################################
