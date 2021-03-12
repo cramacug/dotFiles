@@ -22,6 +22,7 @@ echo "Selected OS: $OS"
 ########## Linux Software
 #############################################################################################
 function install_basics() {
+  printf "\n\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} BASICS ${NC}\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
@@ -68,6 +69,7 @@ function amazon_corretto_11() {
 ########## Oh my zsh
 #############################################################################################
 function install_OhMyZsh() {
+  printf "\n\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} Oh My Zsh ${NC}\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
@@ -118,10 +120,10 @@ function install_OhMyZsh() {
 #############################################################################################
 function install_vim() {
 
+  printf "\n\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} VIM ${NC}\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
-  printf "\n\n"
   sudo apt install -y vim
 
   # Clear old installations
@@ -152,7 +154,7 @@ function install_vim() {
 #############################################################################################
 function install_docker() {
   # https://docs.docker.com/engine/install/ubuntu/
-
+  printf "\n\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} DOCKER ${NC}\n"
   printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
@@ -203,10 +205,10 @@ function install_docker() {
 
 
 function update_zshrc() {
-  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
-  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} ZSHRC ${NC}\n"
-  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "\n\n"
+  printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} ZSHRC ${NC}\n"
+  printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
 
   #ZSH
   local CONFIG_RC_FILE="zshrc"
@@ -226,10 +228,10 @@ function update_zshrc() {
 }
 
 function update_vimrc() {
-  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
-  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} VIMRC ${NC}\n"
-  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "\n\n"
+  printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} VIMRC ${NC}\n"
+  printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
 
   local CONFIG_RC_FILE="vimrc"
   local PATH_TEMP_BACK_UP_FILE="/tmp/$OS/$CONFIG_RC_FILE.$DATE"
@@ -256,9 +258,10 @@ function update_vimrc() {
 }
 
 function update_htoprc() {
-  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
+  printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} HTOP ${NC}\n"
-  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
   printf "\n\n"
 
   local CONFIG_RC_FILE="htoprc"
