@@ -3,12 +3,9 @@
 # Exit on fail. Circuit breaker.
 set -o errexit
 
-PI="pi"
 MAC="mac"
 KUBUNTU="kubuntu"
-SERVER="server"
-K8_MASTER="k8_master"
-K8_NODE="k8_node"
+K8_CLUSTER="k8_cluster"
 
 DATE=$(date +"%Y-%m-%dT%T")
 RESOURCE_DIRECTORY="../files"
@@ -35,7 +32,6 @@ function install_basics() {
   git config --global core.editor "vim"
 
   sudo apt install nfs-common
-  update_htoprc
 }
 function update_fstab() {
   #WIP
@@ -133,6 +129,7 @@ function install_vim() {
     local TEMP_FOLDER="/tmp/$OS/vim_runtime-$DATE/"
     echo "Move existing folder $VIM_RUNTIME_FOLDER to $TEMP_FOLDER"
     mkdir -p "$TEMP_FOLDER"
+    touch "$VIM_RUNTIME_FOLDER"
     mv -v "$VIM_RUNTIME_FOLDER" "$TEMP_FOLDER"
   fi
 
@@ -155,6 +152,10 @@ function install_vim() {
 function install_docker() {
   # https://docs.docker.com/engine/install/ubuntu/
 
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} INSTALL ${NC} : ${BLUE} DOCKER ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
   curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
   if [[ "$OS" == "$PI" || "$OS" == "$KUBUNTU" ]]; then
@@ -191,14 +192,21 @@ function install_docker() {
 }
 #############################################################################################
 ########## docker
-FILE=/etc/resolv.conf
-if [ -f "$FILE" ]; then
-  echo "$FILE exists."
-else
-  echo "$FILE does not exist."
-fi
+
+# FILE=/etc/resolv.conf
+# if [ -f "$FILE" ]; then
+#   echo "$FILE exists."
+# else
+#   echo "$FILE does not exist."
+# fi
+
 
 function update_zshrc() {
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} ZSHRC ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
+
   #ZSH
   local CONFIG_RC_FILE="zshrc"
   local PATH_TEMP_BACK_UP_FILE="/tmp/$OS/$CONFIG_RC_FILE.$DATE"
@@ -209,6 +217,7 @@ function update_zshrc() {
   if [ -f "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" ]; then
     echo "Back up file in: $PATH_PATH_TEMP_BACK_UP_FILE "
     mkdir -p "$PATH_TEMP_BACK_UP_FILE"
+    touch "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
     mv -v "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" "$PATH_TEMP_BACK_UP_FILE"
   else
     cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
@@ -217,6 +226,11 @@ function update_zshrc() {
 }
 
 function update_vimrc() {
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} VIMRC ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
+
   local CONFIG_RC_FILE="vimrc"
   local PATH_TEMP_BACK_UP_FILE="/tmp/$OS/$CONFIG_RC_FILE.$DATE"
 
@@ -226,6 +240,7 @@ function update_vimrc() {
   if [ -f "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" ]; then
     echo "Back up file in: $PATH_PATH_TEMP_BACK_UP_FILE "
     mkdir -p "$PATH_TEMP_BACK_UP_FILE"
+    touch "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
     mv -v "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" "$PATH_TEMP_BACK_UP_FILE"
   else
     cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
@@ -242,6 +257,11 @@ function update_vimrc() {
 }
 
 function update_htoprc() {
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} HTOP ${NC}\n"
+  printf "Execute command: ${YELLOW}--------------------------------------------------------------------------------------------------- ${NC} \n"
+  printf "\n\n"
+
   local CONFIG_RC_FILE="htoprc"
   local PATH_TEMP_BACK_UP_FILE="/tmp/$OS/$CONFIG_RC_FILE.$DATE"
 
@@ -251,11 +271,13 @@ function update_htoprc() {
   if [ -f "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" ]; then
     echo "Back up file in: $PATH_PATH_TEMP_BACK_UP_FILE "
     mkdir -p "$PATH_TEMP_BACK_UP_FILE"
+    touch "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
     mv -v "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED" "$PATH_TEMP_BACK_UP_FILE"
   else
     cp -v "$PATH_FILE_UPDATED" "$FILE_WITH_PATH_THAT_WILL_BE_UPDATED"
   fi
 }
+
 #############################################################################################
 ### Installation options
 #############################################################################################
@@ -269,51 +291,34 @@ if [[ "$OS" == "$KUBUNTU" ]]; then
   install_OhMyZsh
   install_ohMyZsh_powerlevel9k_theme
   install_ZshSyntaxHighlightingPlugin
-elif [[ "$OS" == "$SERVER" ]]; then
+elif [[ "$OS" == "$K8_CLUSTER" ]]; then
   echo "$OS"
   install_basics
   update_fstab
   install_vim
-  amazon_corretto_11
+  install_OhMyZsh
   install_docker
-  install_OhMyZsh
-  install_ohMyZsh_powerlevel9k_theme
-  install_ZshSyntaxHighlightingPlugin
-elif [[ "$OS" == "$K8_MASTER" ]]; then
-  echo "$OS"
-  install_basics
-  update_fstab
-  install_vim
-  install_OhMyZsh
-  #  install_docker
   #  container d
   install_ohMyZsh_powerlevel9k_theme
   install_ZshSyntaxHighlightingPlugin
-elif [[ "$OS" == "$K8_NODE" ]]; then
-  echo "$OS"
-  install_basics
-  update_fstab
-  install_vim
-  #  install_docker
-  #  container d
 elif [[ "$OS" == "$MAC" ]]; then
   echo "$OS"
   # Previously should install brew
   # TODO
 else
   echo "Please add valid SO"
-  printf "Valid OS: %s, %s, %s, %s . \n" $PI, $MAC, $KUBUNTU, $SERVER
-fi
-# String
-if [[ "$OS" == "$PI" || "$OS" == "$MAC" || "$OS" == "$SERVER" || "$OS" == "$KUBUNTU" ]]; then
-  echo "Selected OS: $OS"
-  update_vimrc
-  update_htoprc
-  update_zshrc
-else
-  echo "Please add valid SO"
-  printf "Valid OS: %s, %s, %s. \n" $PI $MAC $KUBUNTU
-  exit
+  printf "Valid OS: %s, %s, %s . \n" $MAC, $KUBUNTU, $SERVER
 fi
 
-echo "Installation of $OS done."
+
+printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
+printf "Execute command: ${GREEN} UPDATE ${NC} : ${BLUE} RC_FILES ${NC}\n"
+printf "Execute command: ${BLUE}--------------------------------------------------------------------------------------------------- ${NC} \n"
+printf "\n\n"
+
+update_vimrc
+update_htoprc
+update_zshrc
+
+
+printf "${GREEN} INSTALLATION DONE! ${NC} \n"
