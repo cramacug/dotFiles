@@ -32,6 +32,6 @@ enable_mouse=1
 delay=15
 left_meters=CPU Memory Swap Battery Blank LeftCPUs
 left_meter_modes=1 1 1 1 2 1
-right_meters=DateTime Tasks Uptime LoadAverage Blank RightCPUs
+right_meters=DateTime Uptime Tasks LoadAverage Blank RightCPUs
 right_meter_modes=2 2 2 2 2 1
 hide_function_bar=0
